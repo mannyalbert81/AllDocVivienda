@@ -2,7 +2,7 @@
 <html lang="es">
      <head>
      
-<?php require_once 'config/global.php';?> 
+<?php //require_once 'config/global.php';?> 
      
         <meta charset="utf-8"/>
         <title>Busqueda de Documentos - aDocument 2015</title>
@@ -214,6 +214,61 @@
 				    document.getElementById("demo").innerHTML = "You selected: " + x;
 			}
 		</script>
+		
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$("#btnBuscar").click(function(){
+			
+			load_DocumentosCartonDoc(1);
+			});
+	});
+
+	
+	function load_DocumentosCartonDoc(pagina){
+		
+		//iniciar variables
+		 var doc_categorias=$("#categorias").val();
+		 var doc_subcategorias=$("#subcategorias").val();
+		 var doc_cartones_doc=$("#carton_documentos").val();
+		 var doc_fecha_doc_desde=$("#fecha_documento_desde").val();
+		 var doc_fecha_doc_hasta=$("#fecha_documento_hasta").val();
+		 var doc_fecha_subida_desde=$("#fecha_subida_desde").val();
+		 var doc_fecha_subida_hasta=$("#fecha_subida_hasta").val();
+		 var doc_year=$("#year").val();
+
+		 	
+		  var con_datos={
+				  categorias:doc_categorias,
+				  subcategorias:doc_subcategorias,
+				  carton_documentos:doc_cartones_doc,
+				  fecha_documento_desde:doc_fecha_doc_desde,
+				  fecha_documento_hasta:doc_fecha_doc_hasta,
+				  fecha_subida_desde:doc_fecha_subida_desde,
+				  fecha_subida_hasta:doc_fecha_subida_hasta,
+				  year:doc_year,
+				  action:'ajax',
+				  page:pagina
+				  };
+
+
+		$("#DocumentosCartonDoc").fadeIn('slow');
+		$.ajax({
+			url:"<?php echo $helper->url("DocumentosCartonDocumentos","buscar");?>",
+            type : "POST",
+            async: true,			
+			data: con_datos,
+			 beforeSend: function(objeto){
+			$("#DocumentosCartonDoc").html('<img src="view/images/ajax-loader.gif"> Cargando...');
+			},
+			success:function(data){
+				$(".DocumentosCartonDoc").html(data).fadeIn('slow');
+				$("#DocumentosCartonDoc").html("");
+			}
+		})
+	}
+	
+	</script>
        
        <style>
             input{
@@ -471,7 +526,8 @@
 		        	<?php if ($resultEdit !="" ) { ?>
 		  	  			<input type="submit" value="Guardar" id="btnGuardar" name="btnGuardar" class="btn btn-success"/>
   	                <?php } else {?>
-  	                	<input type="submit" value="Buscar" id="btnBuscar" name="btnBuscar" class="btn btn-info"/>
+  	                	<input type="button" id="btnBuscar" name="btnBuscar" value="Buscar" class="btn btn-info" />
+  	                	
   	                <?php } ?>
 		        	
 		        	
@@ -484,10 +540,28 @@
       	</table>
       
       	</div>
+      	<!-- termina tabla responsive -->
         </div>  
+        
+        <hr/>
+        
+        <!-- paginacion ajax -->
+        
+        <div style="height: 200px; display: block;">
+		
+		 <h4 style="color:#ec971f;"></h4>
+			  <div >					
+					<div id="DocumentosCartonDoc" style="text-align: center;	top: 55px;	width: 100%;display:none;"></div><!-- Carga gif animado -->
+					<div class="DocumentosCartonDoc" ></div><!-- Datos ajax Final -->
+		      </div>
+		       <br>
+				  
+		 </div>
+        
+        <!--termina paginacion ajax -->
       
 
-     <hr/>  	
+       	<?php /*?>
 
         <section class="col-sm-12" style="height:400px;overflow-y:scroll;">
     
@@ -579,7 +653,7 @@
  				<?php  }   else { ?>
 		        <?php }  ?>
       </section>       
-    
+    <?php */?>
       
        </form>
        </body>  

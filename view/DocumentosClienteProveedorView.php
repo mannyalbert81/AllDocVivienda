@@ -2,7 +2,7 @@
 <html lang="es">
      <head>
      
-<?php require_once 'config/global.php';?> 
+<?php //require_once 'config/global.php';?> 
      
         <meta charset="utf-8"/>
         <title>Busqueda de Documentos - aDocument 2015</title>
@@ -265,7 +265,66 @@
 			}
 		</script>
        
-       <style>
+   <script type="text/javascript">
+	$(document).ready(function(){
+		
+		$("#btnBuscar").click(function(){
+			
+			load_DocumentosClienteProv(1);
+			});
+	});
+
+	
+	function load_DocumentosClienteProv(pagina){
+
+		
+		//iniciar variables
+		 var doc_categorias=$("#categorias").val();
+		 var doc_subcategorias=$("#subcategorias").val();
+		 var doc_ruc_cli=$("#ruc_cliente_proveedor").val();
+		 var doc_nombre_cli=$("#nombre_cliente_proveedor").val();
+		 var doc_fecha_doc_desde=$("#fecha_documento_desde").val();
+		 var doc_fecha_doc_hasta=$("#fecha_documento_hasta").val();
+		 var doc_fecha_subida_desde=$("#fecha_subida_desde").val();
+		 var doc_fecha_subida_hasta=$("#fecha_subida_hasta").val();
+		 var doc_year=$("#year").val();
+
+		 
+		 	
+		  var con_datos={
+				  categorias:doc_categorias,
+				  subcategorias:doc_subcategorias,
+				  ruc_cliente_proveedor:doc_ruc_cli,
+				  nombre_cliente_proveedor:doc_nombre_cli,
+				  fecha_documento_desde:doc_fecha_doc_desde,
+				  fecha_documento_hasta:doc_fecha_doc_hasta,
+				  fecha_subida_desde:doc_fecha_subida_desde,
+				  fecha_subida_hasta:doc_fecha_subida_hasta,
+				  year:doc_year,
+				  action:'ajax',
+				  page:pagina
+				  };
+
+
+		$("#DocumentosClienteProv").fadeIn('slow');
+		$.ajax({
+			url:"<?php echo $helper->url("DocumentosClienteProveedor","buscar");?>",
+            type : "POST",
+            async: true,			
+			data: con_datos,
+			 beforeSend: function(objeto){
+			$("#DocumentosClienteProv").html('<img src="view/images/ajax-loader.gif"> Cargando...');
+			},
+			success:function(data){
+				$(".DocumentosClienteProv").html(data).fadeIn('slow');
+				$("#DocumentosClienteProv").html("");
+			}
+		})
+	}
+	
+	</script>
+       
+       <style
             input{
                 margin-top:5px;
                 margin-bottom:5px;
@@ -545,7 +604,7 @@
 		        	<?php if ($resultEdit !="" ) { ?>
 		  	  			<input type="submit" value="Guardar" id="btnGuardar" name="btnGuardar" class="btn btn-success"/>
   	                <?php } else {?>
-  	                	<input type="submit" value="Buscar" id="btnBuscar" name="btnBuscar" class="btn btn-info"/>
+  	                	<input type="button" value="Buscar" id="btnBuscar" name="btnBuscar" class="btn btn-info"/>
   	                <?php } ?>
 		        	
 		        	
@@ -561,8 +620,24 @@
         </div>  
       
 
-     <hr/>  	
-
+     <hr/>  
+      <!-- paginacion ajax -->
+        
+        <div style="height: 200px; display: block;">
+		
+		 <h4 style="color:#ec971f;"></h4>
+			  <div >					
+					<div id="DocumentosClienteProv" style="text-align: center;	top: 55px;	width: 100%;display:none;"></div><!-- Carga gif animado -->
+					<div class="DocumentosClienteProv" ></div><!-- Datos ajax Final -->
+		      </div>
+		       <br>
+				  
+		 </div>
+        
+        <!--termina paginacion ajax -->
+     
+     	
+<?php /*?>
         <section class="col-sm-12" style="height:400px;overflow-y:scroll;">
     
     
@@ -656,7 +731,7 @@
  				<?php  }   else { ?>
 		        <?php }  ?>
       </section>       
-    
+    <?php */?>
       
        </form>
        </body>  
