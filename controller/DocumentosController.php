@@ -1246,6 +1246,78 @@ class DocumentosController extends ControladorBase{
 		return $out;
 	}
 	
+	public function AutocompleteNombreCliente(){
+	
+		session_start();
+		
+		$nombre_cliente = strtoupper($_GET['term']);
+		
+		
+		//cliente_proveedor
+		$cliente_proveedor=new ClienteProveedorModel();
+		$columnas_cp = " cliente_proveedor.id_cliente_proveedor,  cliente_proveedor.ruc_cliente_proveedor,  
+		 cliente_proveedor.nombre_cliente_proveedor";
+	    $tablas_cp   = "   public.cliente_proveedor, public.documentos_legal";
+		$where_cp  = " cliente_proveedor.id_cliente_proveedor = documentos_legal.id_cliente_proveedor AND 
+		cliente_proveedor.nombre_cliente_proveedor LIKE '$nombre_cliente%' 
+		GROUP BY  cliente_proveedor.ruc_cliente_proveedor, cliente_proveedor.nombre_cliente_proveedor ,
+		cliente_proveedor.id_cliente_proveedor";
+		$id_cp = " cliente_proveedor.nombre_cliente_proveedor";
+		
+		$resultCli=$cliente_proveedor->getCondiciones($columnas_cp, $tablas_cp, $where_cp, $id_cp);
+	
+		
+		if(!empty($resultCli)){
+	
+			foreach ($resultCli as $res){	
+				$_nombre_cliente[] = array('id' => $res->id_cliente_proveedor.','.$res->ruc_cliente_proveedor, 'value' => $res->nombre_cliente_proveedor);
+			}
+			header('Content-type: application/json');
+			echo json_encode($_nombre_cliente);
+		}else 
+		{
+	    header('Content-type: application/json');
+		echo json_encode(array("0"=>'No Data'));
+		}
+	}
+	
+	public function AutocompleteRucCliente(){
+	
+		session_start();
+	
+		$ruc_cliente = strtoupper($_GET['term']);
+		$_ruc_cliente = array();
+	
+	
+		//cliente_proveedor
+		$cliente_proveedor=new ClienteProveedorModel();
+		$columnas_cp = " cliente_proveedor.id_cliente_proveedor,  cliente_proveedor.ruc_cliente_proveedor,
+		 cliente_proveedor.nombre_cliente_proveedor";
+		$tablas_cp   = "   public.cliente_proveedor, public.documentos_legal";
+		$where_cp  = " cliente_proveedor.id_cliente_proveedor = documentos_legal.id_cliente_proveedor AND
+		cliente_proveedor.ruc_cliente_proveedor LIKE '$ruc_cliente%'
+		GROUP BY  cliente_proveedor.ruc_cliente_proveedor, cliente_proveedor.nombre_cliente_proveedor ,
+		cliente_proveedor.id_cliente_proveedor";
+		$id_cp = " cliente_proveedor.nombre_cliente_proveedor";
+	
+		$resultCli=$cliente_proveedor->getCondiciones($columnas_cp, $tablas_cp, $where_cp, $id_cp);
+	
+	
+		if(!empty($resultCli)){
+	
+			foreach ($resultCli as $res){
+	
+				$_ruc_cliente[] = array('id' => $res->id_cliente_proveedor.','.$res->nombre_cliente_proveedor, 'value' => $res->ruc_cliente_proveedor);
+			}
+			echo json_encode($_ruc_cliente);
+		}else
+		{
+			echo json_encode(array(array('id' =>'0,NO DATA', 'value' =>'NO DATA')));
+		}
+	}
+	
+	
+	
 	
 }
 
