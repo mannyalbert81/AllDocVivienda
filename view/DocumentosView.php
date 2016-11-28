@@ -133,56 +133,8 @@
 	</script>
 		
 
-	<script>
-
-		$(document).ready(function(){
-
-		    $("#ruc_cliente_proveedor").change(function() {
-
-		    	///obtengo el id seleccionado
-				var id_cliente_proveedor = $(this).val();
-
-	               if(id_cliente_proveedor > 0)
-	               {
-         		 		$('#nombre_cliente_proveedor').val( id_cliente_proveedor );//To select Blue	 
-         		   }
-	               else
-	               {
-	            		$('#nombre_cliente_proveedor').val( 0 );//To select Blue
-			       }
-	               
-			    });
-
-		}); 
-
-	</script>
+	
 		
-		
-    <script>
-
-		$(document).ready(function(){
-
-		    $("#nombre_cliente_proveedor").change(function() {
-
-	               
-					///obtengo el id seleccionado
-					var id_cliente_proveedor = $(this).val();
-
-	               if(id_cliente_proveedor > 0)
-
-	               {
-         		 		$('#ruc_cliente_proveedor').val( id_cliente_proveedor );//To select Blue	 
-         		   }
-	               else
-	               {
-	            		$('#ruc_cliente_proveedor').val( 0 );//To select Blue
-			       }
-	               
-			    });
-
-		}); 
-
-	</script>		
 	
 	<script>
 
@@ -381,7 +333,7 @@
 		
 	$("#txt_nombre_cliente_proveedor").focusout(function(){
 
-		if((this).val()==''||(this).val()==null)
+		if($("#txt_nombre_cliente_proveedor").val()==''||$("#txt_nombre_cliente_proveedor").val()==null)
 		{
 			 $("#nombre_cliente_proveedor").val(0);
 			 $("#ruc_cliente_proveedor").val(0);
@@ -417,11 +369,39 @@
 		
 	$("#txt_ruc_cliente_proveedor").focusout(function(){
 
-		if((this).val()==''||(this).val()==null)
+		if($("#txt_ruc_cliente_proveedor").val()==''||$("#txt_ruc_cliente_proveedor").val()==null)
 		{
 			 $("#nombre_cliente_proveedor").val(0);
 			 $("#ruc_cliente_proveedor").val(0);
 			 
+		}
+						
+	});
+	});
+		
+					
+    </script>
+    
+    <script>
+	$(document).ready(function(){
+ 	
+	$("#txt_tipo_documentos").autocomplete({
+		source: "<?php echo $helper->url("Documentos","AutocompleteTipoDoc"); ?>",
+		minLength: 1,
+		select: function( event, data ) 
+		{
+		 var respueta = data.item.id;
+		 $("#tipo_documentos").val(respueta);
+		 
+         $("#txt_tipo_documentos").val(data.item.value);
+		}
+	 });
+		
+	$("#txt_tipo_documentos").focusout(function(){
+
+		if($("#txt_tipo_documentos").val()==''||$("#txt_tipo_documentos").val()==null)
+		{
+			 $("#tipo_documentos").val(0);
 		}
 						
 	});
@@ -612,31 +592,18 @@
 		   		</td>
 		
 		   		<td>
-					<select name="tipo_documentos" id="tipo_documentos"  class="form-control">
-									<option value="0"  > --TODOS--</option>
-					      <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
+					 <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
 					       	<?php foreach($resultTip as $resTip) {?>
-								<option value="<?php echo $resTip->id_tipo_documentos; ?>" <?php if ($resTip->id_tipo_documentos == $resEdit->id_tipo_documentos )  echo  ' selected="selected" '  ;  ?> ><?php echo $resTip->nombre_tipo_documentos; ?> </option>
+					       	<input type="text" class="form-control" id="txt_tipo_documentos" name="txt_tipo_documentos" value="<?php if ($resTip->id_tipo_documentos == $resEdit->id_tipo_documentos )  echo  $resTip->nombre_tipo_documentos; ?>">
+                 			
 						   <?php } ?>
-					
-				
-					      <?php } } else {?>
-						 
-							 <?php foreach($resultTip as $resTip) {?>
-						 		<?php if ($sel_tipo_documentos > 0){?>
-						 			<option value="<?php echo $resTip->id_tipo_documentos;?>"  <?php if ($resTip->id_tipo_documentos == $sel_tipo_documentos) {echo "selected"; }  ?>     > <?php echo $resTip->nombre_tipo_documentos; ?> </option>
-					 			<?php  } else { ?>
-					 			
-					 				<option value="<?php echo $resTip->id_tipo_documentos;?>" > <?php echo $resTip->nombre_tipo_documentos; ?> </option>
-					 		
-					 			<?php }  ?>
-	 		
-					 	 	<?php } ?>	
-				        
+						  <?php } } else {?>	
+						  					 
+						  <input type="text" class="form-control" id="txt_tipo_documentos" name="txt_tipo_documentos" value=""  placeholder="Ingrese Tipo Doc">
+                 		  
 						 <?php } ?>
-							
-					</select>
-					<?php unset($resultTip);
+					<input type="hidden"  id="tipo_documentos" name="tipo_documentos" value="0">		 
+				    <?php unset($resultTip);
 						  unset($resTip)
 					?>
 		   		</td>

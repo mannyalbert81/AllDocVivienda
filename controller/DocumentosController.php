@@ -1317,7 +1317,43 @@ class DocumentosController extends ControladorBase{
 	}
 	
 	
+	public function AutocompleteTipoDoc(){
 	
+		session_start();
+	
+		$nombre_tipo_documento = strtoupper($_GET['term']);
+		$_tipo_documento = array();
+	
+	
+		//Tipo de Documento
+		$tipo_documentos=new TipoDocumentosModel();
+		$columnas_td = "  tipo_documentos.nombre_tipo_documentos, tipo_documentos.id_tipo_documentos";
+		$tablas_td   = " public.documentos_legal, public.tipo_documentos";
+		$where_td  = " documentos_legal.id_tipo_documentos = tipo_documentos.id_tipo_documentos AND tipo_documentos.nombre_tipo_documentos LIKE '$nombre_tipo_documento%'
+				GROUP BY tipo_documentos.nombre_tipo_documentos, tipo_documentos.id_tipo_documentos ";
+		$id_td = " tipo_documentos.nombre_tipo_documentos";
+		
+		
+		$resultTip=$tipo_documentos->getCondiciones($columnas_td, $tablas_td, $where_td, $id_td);;
+				
+	
+		
+		if(!empty($resultTip)){
+	
+			foreach ($resultTip as $res){
+	
+				$_tipo_documento[] = array('id' => $res->id_tipo_documentos, 'value' => $res->nombre_tipo_documentos);
+			}
+			//echo json_encode($_ruc_cliente);
+			
+		}else
+		{
+			//echo json_encode(array(array('id' =>'0,NO DATA', 'value' =>'NO DATA')));
+			$_tipo_documento = array(array('id' =>'0', 'value' =>'--TODOS--'));
+		}
+		
+		echo  json_encode($_tipo_documento);
+	}
 	
 }
 
