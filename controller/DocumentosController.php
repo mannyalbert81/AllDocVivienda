@@ -1139,16 +1139,17 @@ class DocumentosController extends ControladorBase{
 								$html.='<td style="color:#000000;font-size:80%;">'.$res->numero_credito_documentos_legal.'</td>';
 								$html.='<td style="color:#000000;font-size:80%;">'.$res->creado.'</td>';
 								$html.='<td><div class="right">';
+								
 								if ($_SESSION["tipo_usuario"]=="usuario_local") {
-									$html.='<a href="'.IP_INT . $res->id_documentos_legal.'" class="btn btn-warning" target="blank">Ver</a>';
+							      	$html.=' <a href="'.IP_EXT . $res->id_documentos_legal.'" class="btn btn-warning" target="blank">Ver</a>';
 								} else {
 									$html.=' <a href="'.IP_EXT . $res->id_documentos_legal.'" class="btn btn-warning" target="blank">Ver</a>';
 								}
 								$html.='</div></td>';
 								$html.='<td><div class="right">';
-								$html.='<a href="index.php?controller=Documentos&action=index&id_documentos_legal='.$res->id_documentos_legal.'"class="btn btn-info">Editar</a>';
+								
 								$html.='</div></td>';
-	
+		
 							}
 	
 							$html.='</tbody>';
