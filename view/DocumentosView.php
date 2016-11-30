@@ -337,6 +337,8 @@
 		{
 			 $("#nombre_cliente_proveedor").val(0);
 			 $("#ruc_cliente_proveedor").val(0);
+			 $("#txt_nombre_cliente_proveedor").val('');
+	         $("#txt_ruc_cliente_proveedor").val('');
 			 
 		}
 						
@@ -373,6 +375,9 @@
 		{
 			 $("#nombre_cliente_proveedor").val(0);
 			 $("#ruc_cliente_proveedor").val(0);
+			 $("#txt_nombre_cliente_proveedor").val('');
+	         $("#txt_ruc_cliente_proveedor").val('');
+	            //alert(data);
 			 
 		}
 						
