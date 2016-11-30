@@ -41,7 +41,7 @@
   	  <div class="row" style="background-color: #FAFAFA;">
        
       <form action="<?php echo $helper->url("Documentos","ActualizarDocumentos"); ?>" method="post" class="col-lg-5">
-            <h4>Actualizar Documentos</h4>
+            <h4 style="color:#ec971f;">Actualizar Documentos</h4>
             <hr/>
             <table class="table">
     	    	<tr>
@@ -140,7 +140,7 @@
        
         <?php if (!empty($resultSet)) {  foreach($resultSet as $res) {?>
         <div class="col-lg-7">
-            <h4>Detalle del Documentos</h4>
+            <h4 style="color:#ec971f;">Detalle del Documentos</h4>
             <hr/>
         </div>
         <section class="col-lg-7 usuario" style="height:600px;overflow-y:scroll;">
@@ -176,5 +176,8 @@
       </div>
        </div>
        
+        <footer class="col-lg-12">
+           <?php include("view/modulos/footer.php"); ?>
+        </footer>
      </body>  
     </html>   

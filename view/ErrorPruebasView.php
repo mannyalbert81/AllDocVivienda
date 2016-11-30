@@ -36,6 +36,8 @@
      </form>
   </div>
   </div>
-  		  <?php include("view/modulos/footer.php"); ?>
+  		  <footer class="col-lg-12">
+           <?php include("view/modulos/footer.php"); ?>
+        </footer>
      </body>  
     </html>
