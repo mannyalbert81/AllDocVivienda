@@ -439,6 +439,8 @@ class DocumentosController extends ControladorBase{
 	
 	public function  Buscador ()
 	{
+		
+		
 	$documentos_legal = new DocumentosLegalModel();
 		
 		$criterio = "";
@@ -448,13 +450,13 @@ class DocumentosController extends ControladorBase{
 		
 		$nombre_controladores = "Documentos";
 		$id_rol= $_SESSION['id_rol'];
-		$resultPer = $documentos_legal->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+		$resultPer = $documentos_legal->getPermisosVer("  controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 			
 		if (!empty($resultPer))
 		{
+			$cantidadResult=0;
+			$filaspaginacion='';
 		
-		
-		        
 				if (isset ($_POST["criterio_busqueda"])  && isset ($_POST["contenido_busqueda"])  )
 				{
 		
@@ -488,7 +490,7 @@ class DocumentosController extends ControladorBase{
 						
 						switch ($criterio) {
 							case 0:
-								$where_0 = "OR cliente_proveedor.ruc_cliente_proveedor LIKE '$contenido'   OR cliente_proveedor.nombre_cliente_proveedor LIKE '$contenido'   OR carton_documentos.numero_carton_documentos LIKE '$contenido'  OR documentos_legal.numero_poliza_documentos_legal LIKE '$contenido'  OR documentos_legal.ramo_documentos_legal LIKE '$contenido'  OR documentos_legal.ciudad_emision_documentos_legal LIKE '$contenido'     ";
+								//$where_0 = "OR cliente_proveedor.ruc_cliente_proveedor LIKE '$contenido'   OR cliente_proveedor.nombre_cliente_proveedor LIKE '$contenido'   OR carton_documentos.numero_carton_documentos LIKE '$contenido'  OR documentos_legal.numero_poliza_documentos_legal LIKE '$contenido'  OR documentos_legal.ramo_documentos_legal LIKE '$contenido'  OR documentos_legal.ciudad_emision_documentos_legal LIKE '$contenido'     ";
 								break;
 							case 1:
 								//Ruc Cliente/Proveedor
@@ -524,78 +526,142 @@ class DocumentosController extends ControladorBase{
 						
 						$where_to  = $where .  $where_0 . $where_1 . $where_2 . $where_3 . $where_4 . $where_5 . $where_6. $where_7 ;
 							
-							
-						$resul = $where_to;
+						$resultSet=$documentos->getCantidad("*", $tablas, $where_to);
 						
-						$resultSet=$documentos->getCondiciones($columnas ,$tablas ,$where_to, $id);
+						$html="";
 						
+						$cantidadResult=(int)$resultSet[0]->total;
 						
-						foreach($resultSet as $res)
+						$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
+						
+						if($action == 'ajax')
 						{
-							$hojasTotales =  $hojasTotales + $res->paginas_documentos_legal;
-							$registrosTotales = $registrosTotales + 1 ;
-						}
-							
 						
+							$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
+						
+							$per_page = 50; //la cantidad de registros que desea mostrar
+							$adjacents  = 9; //brecha entre páginas después de varios adyacentes
+							$offset = ($page - 1) * $per_page;
+						
+							$limit = " LIMIT   '$per_page' OFFSET '$offset'";
+						
+						
+							$resultSet=$documentos->getCondicionesPag($columnas, $tablas, $where_to, $id, $limit);
+						
+							$count_query   = $cantidadResult;
+						
+							$total_pages = ceil($cantidadResult/$per_page);
+						
+							if ($cantidadResult>0)
+							{
+						
+								//<th style="color:#456789;font-size:80%;"></th>
+						
+						
+								$html.='<div class="pull-left">';
+								$html.='<span class="form-control"><strong>Registros: </strong>'.$cantidadResult.'</span>';
+								$html.='<input type="hidden" value="'.$cantidadResult.'" id="total_query" name="total_query"/>' ;
+								$html.='</div><br>';
+								$html.='<section style="height:425px; overflow-y:scroll;">';
+								$html.='<table class="table table-hover">';
+								$html.='<thead>';
+								$html.='<tr class="info">';
+								$html.='<th><b>Id</b></th>';
+								$html.='<th>Fecha del Documento</th>';
+								$html.='<th>Categoria</th>';
+								$html.='<th>Subcategoria</th>';
+								$html.='<th>Tipo Documentos</th>';
+								$html.='<th>Cliente/Proveedor</th>';
+								$html.='<th>Carton Documentos</th>';
+								$html.='<th>Numero Credito</th>';
+								$html.='<th>Fecha de Subida</th>';
+								$html.='<th></th>';
+								$html.='<th></th>';
+								$html.='</tr>';
+								$html.='</thead>';
+								$html.='<tbody>';
+						
+								foreach ($resultSet as $res)
+								{
+									//<td style="color:#000000;font-size:80%;"> <?php echo ;</td>
+										
+						
+									$html.='<tr>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->id_documentos_legal.'</td>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->fecha_documentos_legal.'</td>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->nombre_categorias.'</td>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->nombre_subcategorias.'</td>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->nombre_tipo_documentos.'</td>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->nombre_cliente_proveedor.'</td>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->numero_carton_documentos.'</td>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->numero_credito_documentos_legal.'</td>';
+									$html.='<td style="color:#000000;font-size:80%;">'.$res->creado.'</td>';
+									$html.='<td><div class="right">';
+						
+									if ($_SESSION["tipo_usuario"]=="usuario_local") {
+										$html.=' <a href="'.IP_EXT . $res->id_documentos_legal.'" class="btn btn-warning" target="blank">Ver</a>';
+									} else {
+										$html.=' <a href="'.IP_EXT . $res->id_documentos_legal.'" class="btn btn-warning" target="blank">Ver</a>';
+									}
+									$html.='</div></td>';
+									$html.='<td><div class="right">';
+						
+									$html.='</div></td>';
+						
+								}
+						
+								$html.='</tbody>';
+								$html.='</table>';
+								$html.='</section>';
+								$html.='<div class="table-pagination pull-right">';
+								$html.=''. $this->paginate("index.php", $page, $total_pages, $adjacents).'';
+								$html.='</div>';
+								$html.='</section>';
+						
+						
+							}else{
+						
+								$html.='<div class="alert alert-warning alert-dismissable">';
+								$html.='<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+								$html.='<h4>Aviso!!!</h4> No hay datos para mostrar';
+								$html.='</div>';
+						
+							}
+						
+							echo $html;
+							die();
+								
+						
+						}else 
+						{
+							//en caso de q la carga de datos venga por controlador
 							
+							$page = 1;
+							
+							$per_page = 50; //la cantidad de registros que desea mostrar
+							$adjacents  = 9; //brecha entre páginas después de varios adyacentes
+							$offset = ($page - 1) * $per_page;
+							
+							$limit = " LIMIT   '$per_page' OFFSET '$offset'";
+							
+							
+							$resultSet=$documentos->getCondicionesPag($columnas, $tablas, $where_to, $id, $limit);
+							
+							$total_pages = ceil($cantidadResult/$per_page);
+							
+							$filaspaginacion=$this->paginate("index.php", $page, $total_pages, $adjacents);
+							
+						}
+						
 					}
-				}
-				else 
-				{
-					
 					
 				}
-				
-				///aqui va la paginacion  ///
-				$articulosTotales = 0;
-				$paginasTotales = 0;
-				$paginaActual = 0;
 					
-				if(isset($_POST["pagina"])){
 				
-					// en caso que haya datos, los casteamos a int
-					$paginaActual = (int)$_POST["pagina"];
-				}
-				
-					
-				if ($resultSet != "")
-				{
-				
-					foreach($resultSet as $res)
-					{
-						$articulosTotales = $articulosTotales + 1;
-					}
-				
-				
-					$articulosPorPagina = 50;
-				
-					$paginasTotales = ceil($articulosTotales / $articulosPorPagina);
-				
-				
-					// el número de la página actual no puede ser menor a 0
-					if($paginaActual < 1){
-						$paginaActual = 1;
-					}
-					else if($paginaActual > $paginasTotales){ // tampoco mayor la cantidad de páginas totales
-						$paginaActual = $paginasTotales;
-					}
-				
-					// obtenemos cuál es el artículo inicial para la consulta
-					$articuloInicial = ($paginaActual - 1) * $articulosPorPagina;
-				
-					//agregamos el limit
-					$limit = " LIMIT   '$articulosPorPagina' OFFSET '$articuloInicial'";
-				
-					//volvemos a pedir el resultset con la pginacion
-				
-					$resultSet=$documentos->getCondicionesPag($columnas ,$tablas ,$where_to,  $id, $limit );
-				
-				
-				}
-				
-					$this->view("Buscador",array(
-							"resultSet"=>$resultSet,  "paginasTotales"=>$paginasTotales, "registrosTotales"=> $registrosTotales,"hojasTotales"=>$hojasTotales, "criterio"=>$criterio, "contenido"=>$contenido, "pagina_actual"=>$paginaActual
-					));
+		$this->view("Buscador",array(
+			"resultSet"=>$resultSet,  "cantidadResult"=>$cantidadResult, "filaspaginacion"=> $filaspaginacion
+			
+		));
 				
 				
 				

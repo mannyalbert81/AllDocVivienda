@@ -8,10 +8,6 @@
         <meta charset="utf-8"/>
         <title>Busqueda - aDocument 2015</title>
    
-        		
-		
-
-       
        <style>
             input{
                 margin-top:5px;
@@ -23,8 +19,6 @@
                 
             
         </style>
-        
-        
                
     </head>
     <body>
@@ -56,86 +50,64 @@
 		    </tr>
 	    </table>
 	    
-	    <table class="table">
-	         <tr>
-	    		<th>Id</th>
-	    		<th>Fecha del Documento</th>
-	    		<th>Categoria</th>
-	    		<th>Subcategoria</th>
-	    		<th>Tipo Documentos</th>
-	    		<th>Cliente/Proveedor</th>
-	    		<th>Carton Documentos</th>
-	    		<th>Numero Credito</th>
-	    		<th>Fecha de Subida</th>
-	    		<th></th>
-	    		<th></th>
-	    		
-	  		</tr>
-            <?php// echo $resul  ?>
-			<?php  $paginas =   0;  ?>
-		    <?php  $registros = 0; ?>
-	  		<?php if ($resultSet !="") { foreach($resultSet as $res) {?>
-	        		<tr>
-	                   <td> <?php echo $res->id_documentos_legal; ?>  </td>
-	                   <td> <?php echo $res->fecha_documentos_legal; ?>  </td>
-		               <td> <?php echo $res->nombre_categorias; ?>     </td> 
-		               <td> <?php echo $res->nombre_subcategorias; ?>  </td>
-		               <td> <?php echo $res->nombre_tipo_documentos; ?>     </td>
-		               <td> <?php echo $res->nombre_cliente_proveedor; ?>     </td>
-		               <td> <?php echo $res->numero_carton_documentos; ?>     </td>
-		    	       <td> <?php echo $res->numero_credito_documentos_legal; ?>     </td>
-		    	       
-		    	       <td> <?php echo $res->creado; ?>     </td>
-		            		 <?php  $paginas = $paginas + $res->paginas_documentos_legal;  ?>
-		                     <?php  $registros = $registros + 1 ; ?>
-		    
-		                 <td>
-			           		<div class="right">
-			            
-			                  <?php  if ($_SESSION["tipo_usuario"]=="usuario_local") {  ?>
+	   <div class="pull-left">
+								<span class="form-control"><strong>Registros: </strong><?php echo $cantidadResult; ?></span>
+								<input type="hidden" value="<?php echo $cantidadResult; ?>" id="total_query" name="total_query"/>
+								</div><br>
+								<section style="height:425px; overflow-y:scroll;">
+								<table class="table table-hover">
+								<thead>
+								<tr class="info">
+								<th>Id</th>
+								<th>Fecha del Documento</th>
+								<th>Categoria</th>
+								<th>Subcategoria</th>
+								<th>Tipo Documentos</th>
+								<th>Cliente/Proveedor</th>
+								<th>Carton Documentos</th>
+								<th>Numero Credito</th>
+								<th>Fecha de Subida</th>
+								<th></th>
+								<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								<?php foreach ($resultSet as $res){?>
+									
+														
+									<tr>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->id_documentos_legal; ?></td>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->fecha_documentos_legal; ?></td>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->nombre_categorias; ?></td>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->nombre_subcategorias; ?></td>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->nombre_tipo_documentos; ?></td>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->nombre_cliente_proveedor; ?></td>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->numero_carton_documentos; ?></td>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->numero_credito_documentos_legal; ?></td>
+									<td style="color:#000000;font-size:80%;"><?php echo $res->creado; ?></td>
+									<td><div class="right">
+						
+									<?php  if ($_SESSION["tipo_usuario"]=="usuario_local") {  ?>
 			            		 	  <a href=" <?php echo IP_INT . $res->id_documentos_legal; ?>  " class="btn btn-warning" target="blank">Ver</a>
-			            		 <?php } else {?>
+			            		    <?php } else {?>
 			            		 	  <a href="<?php echo IP_EXT . $res->id_documentos_legal; ?>  " class="btn btn-warning" target="blank">Ver</a> 
-			            		 <?php }?>
-			                           
-			                </div>
-			            
-			             </td>
-			             <td>
-			           		<div class="right">
-			                    <a href="<?php echo $helper->url("Documentos","index"); ?>&id_documentos_legal=<?php echo $res->id_documentos_legal; ?>" class="btn btn-info">Editar</a>
-			            
-			                </div>
-			            
-			             </td>
-			             
-		    		</tr>
-		  		
-		           	  
-		        <?php } ?>
-		</table>      		
-		<table class="table">
-				<th class="text-center">
-				    	<nav>
-						  <ul id="pagina" name="pagina" class="pagination">
-						    <?php if ($paginasTotales > 0) {?>
-						    <?php for ($i = 1; $i< $paginasTotales+1; $i++)  { ?>
-						    		<input type="submit" value="<?php echo $i; ?>" id="pagina"  <?php if ($i == $pagina_actual ) { echo 'style="color: #1454a3 " '; }  ?>     name="pagina" class="btn btn-info"/>
-						    	
-						    <?php    } }?>
-						    
-						  </ul>
-						</nav>	   	   
-			
-				</th>
-				<tr class="bg-primary">
-						<p class="text-center"> <strong> Registros Cargados: <?php echo  $registros?> Hojas Cargadas: <?php echo $paginas?> Registros Totales: <?php echo  $registrosTotales?> Hojas Totales: <?php echo $hojasTotales?> </strong>  </p>
-	     		  	
-				</tr>			
-		</table>
-		 	
- 				<?php  }   else { ?>
-		        <?php }  ?>
+			            		     <?php }?>
+									</div></td>
+									<td><div class="right">
+						
+									</div></td>
+						
+								<?php } ?>
+						
+								</tbody>
+								</table>
+								</section>
+								<div class="table-pagination pull-right">
+								<?php echo $filaspaginacion;?>
+								</div>
+								</section>
+	    
+ 				
       	</section>       
       </form>  
         
