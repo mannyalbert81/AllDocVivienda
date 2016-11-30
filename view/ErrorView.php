@@ -17,10 +17,14 @@
             
         </style>
     </head>
-      <body>
+      <body style="background-color: #F6FADE">
     
           <?php include("view/modulos/head.php"); ?>
           <?php include("view/modulos/menu.php"); ?>
+          
+          <div class="container">
+      <div class="row" style="background-color: #FAFAFA;">
+      
       <form  method="post" class="col-lg-5">
             <h3>Error Detectado</h3>
             <hr/>
@@ -28,7 +32,8 @@
             	
             
      </form>
-  
+  </div>
+  </div>
   		  <?php include("view/modulos/footer.php"); ?>
      </body>  
     </html>

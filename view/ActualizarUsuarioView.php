@@ -55,14 +55,15 @@
         
         
     </head>
-    <body>
+    <body style="background-color: #F6FADE">
     
        <?php include("view/modulos/head.php"); ?>
        
        <?php include("view/modulos/menu.php"); ?>
   
     
-       
+      <div class="container">
+      <div class="row" style="background-color: #FAFAFA;">
       <form action="<?php echo $helper->url("Usuarios","Actualiza"); ?>" method="post" class="col-lg-5">
             <h4>Actualizar Datos de Usuario</h4>
             <hr/>
@@ -152,6 +153,8 @@
         <div class="col-lg-7">
         
         </div>
+       </div>
+       </div>
        
      </body>  
     </html>   

@@ -18,13 +18,15 @@
             
         </style>
     </head>
-      <body>
+      <body style="background-color: #F6FADE">
     
        <?php include("view/modulos/head.php"); ?>
        
        <?php include("view/modulos/menu.php"); ?>
   
-    
+    <div class="container">
+      <div class="row" style="background-color: #FAFAFA;">
+      
       <form action="<?php echo $helper->url("ClienteProveedor","Update"); ?>" method="post" class="col-lg-12">
      
      	 <section class="col-sm-12" style="height:400px;overflow-y:scroll;">
@@ -64,7 +66,8 @@
     
                
  	  </form>
-       
+       </div>
+       </div>
       
         
      </body>  
