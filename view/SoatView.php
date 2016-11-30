@@ -26,7 +26,7 @@
       <div class="row" style="background-color: #FAFAFA;">
       
       <form action="<?php echo $helper->url("Soat","Update"); ?>" method="post" class="col-lg-5">
-            <h4>Modificar SOAT</h4>
+            <h4 style="color:#ec971f;">Modificar SOAT</h4>
             <hr/>
             	
 		   				  	  
@@ -57,7 +57,7 @@
        
        
         <div class="col-lg-7">
-            <h4>Cierres de Ventas</h4>
+            <h4 style="color:#ec971f;">Cierres de Ventas</h4>
             <hr/>
         </div>
         <section class="col-lg-7 usuario" style="height:400px;overflow-y:scroll;">

@@ -30,7 +30,7 @@
             
             
              <h4 style="color:#ec971f;">Insertar Usuarios</h4>
-            	<hr/>
+            	
             <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
             <table class="table">
             	<tr>
@@ -172,9 +172,9 @@
        
         <div class="col-lg-7">
              <h4 style="color:#ec971f;">Lista de  Usuarios</h4>
-            	<hr/>
+            	
         </div>
-        <section class="col-lg-7 usuario" style="height:600px;overflow-y:scroll;">
+        <section class="col-lg-7 usuario" style="height:510px;overflow-y:scroll;">
         <table class="table table-hover">
 	         <tr>
 	    		<th>Id</th>
@@ -191,23 +191,23 @@
             
 	            <?php if (!empty($resultSet)) {  foreach($resultSet as $res) {?>
 	        		<tr>
-	                   <td> <?php echo $res->id_usuario; ?>  </td>
-		               <td> <?php echo $res->nombre_usuario; ?>     </td> 
-		               <td> <?php echo $res->usuario_usuario; ?>  </td>
-		               <td> <?php echo $res->telefono_usuario; ?>  </td>
-		               <td> <?php echo $res->celular_usuario; ?>  </td>
-		               <td> <?php echo $res->correo_usuario; ?>  </td>
-		               <td> <?php echo $res->nombre_rol; ?>  </td>
-		               <td> <?php echo $res->nombre_estado; ?>  </td>
+	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->id_usuario; ?>  </td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_usuario; ?>     </td> 
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->usuario_usuario; ?>  </td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->telefono_usuario; ?>  </td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->celular_usuario; ?>  </td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->correo_usuario; ?>  </td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_rol; ?>  </td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_estado; ?>  </td>
 		           	   <td>
 			           		<div class="right">
-			                    <a href="<?php echo $helper->url("Usuarios","index"); ?>&id_usuario=<?php echo $res->id_usuario; ?>" class="btn btn-warning">Editar</a>
+			                    <a href="<?php echo $helper->url("Usuarios","index"); ?>&id_usuario=<?php echo $res->id_usuario; ?>" class="btn btn-warning" style="font-size:65%;"><i class='glyphicon glyphicon-edit'></i></a>
 			                </div>
 			            
 			             </td>
 			             <td>   
 			                	<div class="right">
-			                    <a href="<?php echo $helper->url("Usuarios","borrarId"); ?>&id_usuario=<?php echo $res->id_usuario; ?>" class="btn btn-danger">Borrar</a>
+			                    <a href="<?php echo $helper->url("Usuarios","borrarId"); ?>&id_usuario=<?php echo $res->id_usuario; ?>" class="btn btn-danger" style="font-size:65%;"><i class="glyphicon glyphicon-trash"></i></a>
 			                </div>
 			                <hr/>
 		               </td>
@@ -222,8 +222,17 @@
             
        	</table>     
       </section>
+      
+      <br>
+      <br>
+      
       </div>
        </div>
+       
+       <br>
+      <br>
+      <br>
+      <br>
         <footer class="col-lg-12">
            <?php include("view/modulos/footer.php"); ?>
         </footer>

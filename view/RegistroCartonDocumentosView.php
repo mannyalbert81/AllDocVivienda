@@ -125,7 +125,7 @@
       <div class="row" style="background-color: #FAFAFA;">
       
       <form action="<?php echo $helper->url("RegistroCartonDocumentos","Insert"); ?>" method="post" class="col-lg-7">
-            <h4>Agregar Cartón de Documentos</h4>
+            <h4 style="color:#ec971f;">Agregar Cartón de Documentos</h4>
             
 		     <table class="table">			  	  
             
@@ -164,7 +164,7 @@
           
        
         <div class="col-lg-5">
-            <h4>Cartones de Documentos Registrados</h4>
+            <h4 style="color:#ec971f;">Cartones de Documentos Registrados</h4>
             <hr/>
         </div>
         <section class="col-lg-5 usuario" style="height:400px;overflow-y:scroll;">

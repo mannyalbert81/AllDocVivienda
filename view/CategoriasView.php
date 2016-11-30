@@ -26,7 +26,7 @@
       <div class="row" style="background-color: #FAFAFA;">
       
       <form action="<?php echo $helper->url("Categorias","InsertaCategorias"); ?>" method="post" class="col-lg-5">
-            <h4>Insertar Categorias</h4>
+            <h4 style="color:#ec971f;">Insertar Categorias</h4>
             <hr/>
             	
 		   		
@@ -51,7 +51,7 @@
        
        
         <div class="col-lg-7">
-            <h4>Categorias</h4>
+            <h4 style="color:#ec971f;">Categorias</h4>
             <hr/>
         </div>
         <section class="col-lg-7 usuario" style="height:400px;overflow-y:scroll;">
@@ -66,18 +66,18 @@
             
 	            <?php foreach($resultSet as $res) {?>
 	        		<tr>
-	                   <td> <?php echo $res->id_categorias; ?>  </td>
-		               <td> <?php echo $res->nombre_categorias; ?>     </td> 
-		               <td> <?php echo $res->nombre_categorias; ?>  </td>
+	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->id_categorias; ?>  </td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_categorias; ?>     </td> 
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_categorias; ?>  </td>
 		               <td>
 			           		<div class="right">
-			                    <a href="<?php echo $helper->url("Categorias","index"); ?>&id_categorias=<?php echo $res->id_categorias; ?>" class="btn btn-warning">Editar</a>
+			                    <a href="<?php echo $helper->url("Categorias","index"); ?>&id_categorias=<?php echo $res->id_categorias; ?>" class="btn btn-warning" style="font-size:65%;"><i class='glyphicon glyphicon-edit'></i></a>
 			                </div>
 			            
 			             </td>
 			             <td>   
 			                	<div class="right">
-			                    <a href="<?php echo $helper->url("Categorias","borrarId"); ?>&id_categorias=<?php echo $res->id_categorias; ?>" class="btn btn-danger">Borrar</a>
+			                    <a href="<?php echo $helper->url("Categorias","borrarId"); ?>&id_categorias=<?php echo $res->id_categorias; ?>" class="btn btn-danger" style="font-size:65%;"><i class="glyphicon glyphicon-trash"></i></a>
 			                </div>
 			                <hr/>
 		               </td>

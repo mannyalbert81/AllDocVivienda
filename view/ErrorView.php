@@ -26,7 +26,7 @@
       <div class="row" style="background-color: #FAFAFA;">
       
       <form  method="post" class="col-lg-5">
-            <h3>Error Detectado</h3>
+            <h3 style="color:#ec971f;">Error Detectado</h3>
             <hr/>
             <?php echo $resultado?>
             	

@@ -82,7 +82,7 @@
       
       <form action="<?php echo $helper->url("TiposDocumentos","index"); ?>" method="post" class="col-lg-12">
      
-     	
+     	<br>
    
         <div class="col-lg-12 usuario">
         	<div class="row">
@@ -101,7 +101,7 @@
 			    <div class="col-xs-3 col-md-3">
 		        	
 		        </div>
-			    <div class="col-xs-4 col-md-4">
+			    <div class="col-xs-2 col-md-2">
 		       	<button type="submit" name="btn_index_nombre" id="btn_index_nombre" class="btn btn-default" aria-label="Left Align">
 					  <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
 					</button>
@@ -110,7 +110,7 @@
 		         <div class="col-xs-1 col-md-1">
 		        		<input type="submit" name="btn_guardar" id="btn_guardar" class="btn btn-success"   value="Guardar" />
 		        </div>
-		        <div class="col-xs-1 col-md-1">
+		        <div class="col-xs-1 col-md-3">
 		        		<h4>Registros Totales: <?php echo $registrosTotales;?></h4>
 		        </div>
 			  </div>  
@@ -195,6 +195,10 @@
   </form>
        
       </div></div>
+      
+      <br>
+      <br>
+      <br>
          <footer class="col-lg-12">
            <?php include("view/modulos/footer.php"); ?>
         </footer>

@@ -27,7 +27,7 @@
       <div class="row" style="background-color: #FAFAFA;">
       
       <form action="<?php echo $helper->url("Roles","InsertaRoles"); ?>" method="post" class="col-lg-5">
-            <h4>Insertar Roles</h4>
+            <h4 style="color:#ec971f;">Insertar Roles</h4>
             <hr/>
             	
 		   		
@@ -49,8 +49,8 @@
        
        
         <div class="col-lg-7">
-            <h4>Roles de Usuario</h4>
-            <hr/>
+            <h4 style="color:#ec971f;">Roles de Usuario</h4>
+            
         </div>
         <section class="col-lg-7 usuario" style="height:400px;overflow-y:scroll;">
         <table class="table table-hover">
@@ -63,18 +63,18 @@
             
 	            <?php foreach($resultSet as $res) {?>
 	        		<tr>
-	                   <td> <?php echo $res->id_rol; ?>  </td>
-		               <td> <?php echo $res->nombre_rol; ?>     </td> 
+	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->id_rol; ?>  </td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_rol; ?>     </td> 
 		               
 		               <td>
 			           		<div class="right">
-			                    <a href="<?php echo $helper->url("Roles","index"); ?>&id_rol=<?php echo $res->id_rol; ?>" class="btn btn-warning">Editar</a>
+			                    <a href="<?php echo $helper->url("Roles","index"); ?>&id_rol=<?php echo $res->id_rol; ?>" class="btn btn-warning" style="font-size:65%;"><i class='glyphicon glyphicon-edit'></i></a>
 			                </div>
 			            
 			             </td>
 			             <td>   
 			                	<div class="right">
-			                    <a href="<?php echo $helper->url("Roles","borrarId"); ?>&id_rol=<?php echo $res->id_rol; ?>" class="btn btn-danger">Borrar</a>
+			                    <a href="<?php echo $helper->url("Roles","borrarId"); ?>&id_rol=<?php echo $res->id_rol; ?>" class="btn btn-danger" style="font-size:65%;"><i class="glyphicon glyphicon-trash"></i></a>
 			                </div>
 			                <hr/>
 		               </td>

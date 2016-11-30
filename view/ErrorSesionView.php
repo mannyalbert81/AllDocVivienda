@@ -24,7 +24,7 @@
       <div class="row" style="background-color: #FAFAFA;">
       
                 <form  method="post" class="col-lg-5">
-            <h3>Debes Iniciar Sesion</h3>
+            <h3 style="color:#ec971f;">Debes Iniciar Sesion</h3>
             <hr/>
             
             	

@@ -26,7 +26,7 @@
       <div class="row" style="background-color: #FAFAFA;">
       
       <form action="<?php echo $helper->url("Documentos","BuscaxCarton"); ?>" method="post" class="col-lg-3">
-            <h4>Búsque da Contenido de Cartón de Documentoes</h4>
+            <h4 style="color:#ec971f;">Búsque da Contenido de Cartón de Documentoes</h4>
             <hr/>
             
             
@@ -69,7 +69,7 @@
        
        
         <div class="col-lg-9">
-            <h4>Documentos Contenidos en este Cartón</h4>
+            <h4 style="color:#ec971f;">Documentos Contenidos en este Cartón</h4>
             <hr/>
         </div>
        

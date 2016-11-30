@@ -82,7 +82,7 @@
       
       <form action="<?php echo $helper->url("ClienteProveedor","index"); ?>" method="post" class="col-lg-12">
      
-     	
+     	<br>
    
         <div class="col-lg-12 usuario">
         	<div class="row">
@@ -104,7 +104,7 @@
 					</button>
 		        	
 		        </div>
-			    <div class="col-xs-4 col-md-4">
+			    <div class="col-xs-2 col-md-2">
 		        	<button type="submit" name="btn_index_nombre" id="btn_index_nombre" class="btn btn-default" aria-label="Left Align">
 					  <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
 					</button>
@@ -113,7 +113,7 @@
 		         <div class="col-xs-1 col-md-1">
 		        		<input type="submit" name="btn_guardar" id="btn_guardar" class="btn btn-success"   value="Guardar" />
 		        </div>
-		        <div class="col-xs-1 col-md-1">
+		        <div class="col-xs-3 col-md-3">
 		        		<h4>Registros: <?php echo $registrosTotales;?></h4>
 		        </div>
 			  </div>  
@@ -122,7 +122,7 @@
   		 
         	
 	
-		<section class="col-lg-12 usuario" style="height:400px;overflow-y:scroll;">
+		<section class="col-lg-12 usuario" style="height:410px;overflow-y:scroll;">
 				 <?php $registros = 0;?>
 				  <?php foreach($resultCli as $res) {?>
 					<div class="row" style="margin-top: 5px;">
@@ -203,6 +203,11 @@
        
       </div>
       </div>
+      
+      <br>
+      <br>
+      <br>
+      <br>
        <footer class="col-lg-12">
            <?php include("view/modulos/footer.php"); ?>
         </footer>  

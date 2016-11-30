@@ -26,7 +26,7 @@
       <div class="row" style="background-color: #FAFAFA;">
         
       <form action="<?php echo $helper->url("CartonImpreso","Insert"); ?>" method="post" class="col-lg-5">
-            <h4>Modificar Cartón de Documentos</h4>
+            <h4 style="color:#ec971f;">Modificar Cartón de Documentos</h4>
             <hr/>
             <table class="table">
             
@@ -78,7 +78,7 @@
        
        
         <div class="col-lg-7">
-            <h4>Etiquetas Generadas</h4>
+            <h4 style="color:#ec971f;">Etiquetas Generadas</h4>
             <hr/>
         </div>
         <section class="col-lg-7 usuario" style="height:400px;overflow-y:scroll;">

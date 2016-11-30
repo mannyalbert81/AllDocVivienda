@@ -26,7 +26,7 @@
       
     
       <form action="<?php echo $helper->url("Categorias","InsertaCategorias"); ?>" method="post" class="col-lg-5">
-            <h4>Insertar Categorias</h4>
+            <h4 style="color:#ec971f;">Insertar Categorias</h4>
             <hr/>
             	
 		   		
@@ -51,7 +51,7 @@
        
        
         <div class="col-lg-7">
-            <h4>Categorias</h4>
+            <h4 style="color:#ec971f;">Categorias</h4>
             <hr/>
         </div>
         <section class="col-lg-7 usuario" style="height:400px;overflow-y:scroll;">
