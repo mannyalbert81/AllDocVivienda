@@ -40,8 +40,6 @@
      <hr/>  	
 	  <form id="formularioPrincipal" action="<?php echo $helper->url("Documentos","Buscador"); ?>" method="post" class="form-horizontal">
     
-    	<section class="col-sm-12" style="height:400px;overflow-y:scroll;">
-    
     
 	    <table>
 		    <tr> 
@@ -109,8 +107,7 @@
 								</div>
 								</section>
 	    
- 				
-      	</section>       
+ 	
       </form>  
         
        
