@@ -27,8 +27,10 @@
       
        
       <form action="<?php echo $helper->url("Usuarios","InsertaUsuarios"); ?>" method="post" class="col-lg-5">
-            <h4>Insertar Usuarios</h4>
-            <hr/>
+            
+            
+             <h4 style="color:#ec971f;">Insertar Usuarios</h4>
+            	<hr/>
             <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
             <table class="table">
             	<tr>
@@ -169,8 +171,8 @@
        
        
         <div class="col-lg-7">
-            <h4>Lista de Usuarios</h4>
-            <hr/>
+             <h4 style="color:#ec971f;">Lista de  Usuarios</h4>
+            	<hr/>
         </div>
         <section class="col-lg-7 usuario" style="height:600px;overflow-y:scroll;">
         <table class="table table-hover">
@@ -222,5 +224,8 @@
       </section>
       </div>
        </div>
+        <footer class="col-lg-12">
+           <?php include("view/modulos/footer.php"); ?>
+        </footer>
      </body>  
     </html>   
