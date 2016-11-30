@@ -339,7 +339,7 @@
         
                
     </head>
-    <body>
+    <body style="background-color: #F6FADE">
  
  
        <?php include("view/modulos/head.php"); ?>
@@ -382,6 +382,8 @@
 		   }
 		   
 		?>
+      <div class="container">
+      <div class="row" style="background-color: #FAFAFA;">
         
       <form id="formularioPrincipal" action="<?php echo $helper->url("DocumentosClienteProveedor","index"); ?>" method="post" class="form-horizontal">
         
@@ -734,5 +736,7 @@
     <?php */?>
       
        </form>
+       </div>
+       </div>
        </body>  
     </html>

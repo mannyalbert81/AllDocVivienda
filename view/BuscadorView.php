@@ -27,7 +27,7 @@
         
                
     </head>
-    <body>
+    <body style="background-color: #F6FADE">
  
  
        <?php include("view/modulos/head.php"); ?>
@@ -37,7 +37,9 @@
      
       
 	
-     
+     <div class="container">
+      <div class="row" style="background-color: #FAFAFA;">
+      
      <div class="table-responsive">
      
     
@@ -142,6 +144,8 @@
        
        		   	   
      </div>  		
+ </div>
+ </div>
  
        
        </body>  

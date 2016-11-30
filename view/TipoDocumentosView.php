@@ -71,13 +71,15 @@
             
         </style>
     </head>
-      <body>
+      <body style="background-color: #F6FADE">
     
        <?php include("view/modulos/head.php"); ?>
        
        <?php include("view/modulos/menu.php"); ?>
   
-    
+    <div class="container">
+      <div class="row" style="background-color: #FAFAFA;">
+      
       <form action="<?php echo $helper->url("TiposDocumentos","index"); ?>" method="post" class="col-lg-12">
      
      	
@@ -192,7 +194,7 @@
               
   </form>
        
-      
+      </div></div>
         
      </body>  
     </html>     

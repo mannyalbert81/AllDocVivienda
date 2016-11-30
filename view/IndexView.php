@@ -12,7 +12,7 @@
             }
         </style>
     </head>
-    <body>
+    <body style="background-color: #F6FADE">
         <form action="<?php echo $helper->url("usuarios","crear"); ?>" method="post" class="col-lg-5">
             <h3>A�adir usuario</h3>
             <hr/>
