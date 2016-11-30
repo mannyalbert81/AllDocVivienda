@@ -3,21 +3,23 @@
      <head>
      
 <?php //require_once 'config/global.php';?> 
+<?php //echo json_encode($resultCli);?>
      
         <meta charset="utf-8"/>
         <title>Busqueda de Documentos - aDocument 2015</title>
    
-  
-   
+  		
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		   
-          <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		 
 		  <link rel="stylesheet" href="/resources/demos/style.css">
 		<link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css">
         <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
         <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script type="text/javascript" src="view/css/jquery-ui.js"></script>
+        
  
  		
 		<script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
@@ -322,8 +324,84 @@
 	}
 	
 	</script>
+	
+	 <script>
+	$(document).ready(function(){
+ 	
+	$("#txt_nombre_cliente_proveedor").autocomplete({
+		source: "<?php echo $helper->url("DocumentosClienteProveedor","AutocompleteNombreCliente"); ?>",
+		minLength: 1,
+		select: function( event, data ) 
+			{
+			 var respueta = data.item.id;
+			 var res = respueta.split(',');
+			 
+			 $("#nombre_cliente_proveedor").val(res[0]);
+			 $("#ruc_cliente_proveedor").val(res[0]);
+			 
+             $("#txt_nombre_cliente_proveedor").val(data.item.value);
+             $("#txt_ruc_cliente_proveedor").val(res[1]);
+	            //alert(data);
+			}
+	 });
+		
+	$("#txt_nombre_cliente_proveedor").focusout(function(){
+
+		if($("#txt_nombre_cliente_proveedor").val()==''||$("#txt_nombre_cliente_proveedor").val()==null)
+		{
+			 $("#nombre_cliente_proveedor").val(0);
+			 $("#ruc_cliente_proveedor").val(0);
+			 $("#txt_nombre_cliente_proveedor").val('');
+	         $("#txt_ruc_cliente_proveedor").val('');
+			 
+		}
+						
+	});
+						
+	});
+		
+					
+    </script>
+    
+    <script>
+	$(document).ready(function(){
+ 	
+	$("#txt_ruc_cliente_proveedor").autocomplete({
+		source: "<?php echo $helper->url("DocumentosClienteProveedor","AutocompleteRucCliente"); ?>",
+		minLength: 1,
+		select: function( event, data ) 
+		{
+		 var respueta = data.item.id;
+		 var res = respueta.split(',');
+		 
+		 $("#nombre_cliente_proveedor").val(res[0]);
+		 $("#ruc_cliente_proveedor").val(res[0]);
+		 
+         $("#txt_nombre_cliente_proveedor").val(res[1]);
+         $("#txt_ruc_cliente_proveedor").val(data.item.value);
+            //alert(data);
+		}
+	 });
+		
+	$("#txt_ruc_cliente_proveedor").focusout(function(){
+
+		if($("#txt_ruc_cliente_proveedor").val()==''||$("#txt_ruc_cliente_proveedor").val()==null)
+		{
+			 $("#nombre_cliente_proveedor").val(0);
+			 $("#ruc_cliente_proveedor").val(0);
+			 $("#txt_nombre_cliente_proveedor").val('');
+	         $("#txt_ruc_cliente_proveedor").val('');
+	            //alert(data);
+			 
+		}
+						
+	});
+	});
+		
+					
+    </script>
        
-       <style
+       <style>
             input{
                 margin-top:5px;
                 margin-bottom:5px;
@@ -345,9 +423,7 @@
      
        
        <?php include("view/modulos/menu.php"); ?>
-  
-        
-       <?php
+   <?php
    
 		   $sel_categorias = 0;
 		   $sel_subcategorias = 0;
@@ -381,10 +457,11 @@
 		   }
 		   
 		?>
-      <div class="container">
+		
+    <div class="container">
       <div class="row" style="background-color: #FAFAFA;">
-        
-      <form id="formularioPrincipal" action="<?php echo $helper->url("DocumentosClienteProveedor","index"); ?>" method="post" class="form-horizontal">
+      
+      <form id="formularioPrincipal" action="<?php echo $helper->url("Documentos","index"); ?>" method="post" class="form-horizontal">
         
      
       <div class="panel panel-default">
@@ -398,7 +475,7 @@
   	      
   	      </div>
 
-      <div class="table-responsive">
+     <div class="table-responsive">
      
     
        	<table class="col-sm-12">     	
@@ -466,54 +543,36 @@
 	     			     		</select>
 		   		</td>
 		
-		   		<td>	       		
-           	 		<select name="ruc_cliente_proveedor" id="ruc_cliente_proveedor"  class="form-control">
-								<option value="0"  > --TODOS--</option>
-					        <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
+		   		<td>
+		   		<input type="hidden"  id="ruc_cliente_proveedor" name="ruc_cliente_proveedor" value="0">
+                 	  
+		   		
+		   		 <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
 					        	<?php foreach($resultCli as $resCli) {?>
-									<option value="<?php echo $resCli->id_cliente_proveedor; ?>" <?php if ($resCli->id_cliente_proveedor == $resEdit->id_cliente_proveedor )  echo  ' selected="selected" '  ;  ?> ><?php echo $resCli->ruc_cliente_proveedor; ?> </option>
-							    <?php } ?>
+										<input type="text" class="form-control" id="txt_ruc_cliente_proveedor" name="txt_ruc_cliente_proveedor" value="<?php if ($resCli->id_cliente_proveedor == $resEdit->id_cliente_proveedor )  echo  $resCli->ruc_cliente_proveedor; ?>">
+                 			  <?php } ?>
 					     <?php } } else {?>
-			
-					    	 <?php foreach($resultCli as $resCli) {?>
-						 		<?php if ($sel_cliente_proveedor > 0){?>
-						 			<option value="<?php echo $resCli->id_cliente_proveedor;?>"  <?php if ($resCli->id_cliente_proveedor == $sel_cliente_proveedor) {echo "selected"; }  ?>     > <?php echo $resCli->ruc_cliente_proveedor; ?> </option>
-						 		
-					 			<?php  } else { ?>
-					 			
-					 				<option value="<?php echo $resCli->id_cliente_proveedor;?>" > <?php echo $resCli->ruc_cliente_proveedor; ?> </option>
-					 		
-					 			<?php }  ?>
-	 		
-					 	 	<?php } ?>	
-						    
+					     
+					     <input type="text" class="form-control" id="txt_ruc_cliente_proveedor" name="txt_ruc_cliente_proveedor" value=""  placeholder="Ingrese Ruc Cliente">
+                 		  									
 						 <?php } ?>
-						
-					</select>
+						      		
+           	 		
            		</td>
 		
-		   		<td>	       		
-           	 		<select name="nombre_cliente_proveedor" id="nombre_cliente_proveedor"  class="form-control">
-								<option value="0"  > --TODOS--</option>
-					      <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
+		   		<td>
+		   		    <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
 					       	<?php foreach($resultCli as $resCli) {?>
-								<option value="<?php echo $resCli->id_cliente_proveedor; ?>" <?php if ($resCli->id_cliente_proveedor == $resEdit->id_cliente_proveedor )  echo  ' selected="selected" '  ;  ?> ><?php echo $resCli->nombre_cliente_proveedor; ?> </option>
+					       	<input type="text" class="form-control" id="txt_nombre_cliente_proveedor" name="txt_nombre_cliente_proveedor" value="<?php if ($resCli->id_cliente_proveedor == $resEdit->id_cliente_proveedor )  echo  $resCli->nombre_cliente_proveedor; ?>">
+                 			
 						   <?php } ?>
-						  <?php } } else {?>
-						 
-						  <?php foreach($resultCli as $resCli) {?>
-						 		<?php if ($sel_cliente_proveedor > 0){?>
-						 			<option value="<?php echo $resCli->id_cliente_proveedor;?>"  <?php if ($resCli->id_cliente_proveedor == $sel_cliente_proveedor) {echo "selected"; }  ?>     > <?php echo $resCli->nombre_cliente_proveedor; ?> </option>
-					 			<?php  } else { ?>
-					 			
-					 				<option value="<?php echo $resCli->id_cliente_proveedor;?>" > <?php echo $resCli->nombre_cliente_proveedor; ?> </option>
-					 		
-					 			<?php }  ?>
-	 		
-					 	 	<?php } ?>	
+						  <?php } } else {?>	
+						  					 
+						  <input type="text" class="form-control" id="txt_nombre_cliente_proveedor" name="txt_nombre_cliente_proveedor" value=""  placeholder="Ingrese nombre Cliente">
+                 		  
 						 <?php } ?>
-						 
-					</select>
+				         <input type="hidden"  id="nombre_cliente_proveedor" name="nombre_cliente_proveedor" value="0">		 
+					 
 					<?php unset($resultCli);
 						  unset($resCli);?>
 		   		</td>
@@ -621,8 +680,9 @@
         </div>  
       
 
-     <hr/>  
-      <!-- paginacion ajax -->
+     <hr/> 
+     
+     <!-- paginacion ajax -->
         
         <div style="height: 200px; display: block;">
 		
@@ -635,11 +695,11 @@
 				  
 		 </div>
         
-        <!--termina paginacion ajax -->
+      <!--termina paginacion ajax -->
      
-     	
-<?php /*?>
-        <section class="col-sm-12" style="height:400px;overflow-y:scroll;">
+
+      <?php /*?>
+       <section class="col-sm-12" style="height:400px;overflow-y:scroll;">
     
     
 	    <table>
@@ -649,7 +709,7 @@
 		    </tr>
 	    </table>
 	    
-	 
+	  
 	    <table class="table">
 	         <tr>
 	    		<th>Id</th>
@@ -708,8 +768,8 @@
 		           	  
 		        <?php } ?>
 		</table>      		
-		  		
-	<table class="table">
+		    		
+		<table class="table">
 				<th class="text-center">
 				    	<nav>
 						  <ul id="pagina" name="pagina" class="pagination">
@@ -735,9 +795,10 @@
     <?php */?>
       
        </form>
+     <br>
+     <br>
        </div>
        </div>
-       
         <footer class="col-lg-12">
            <?php include("view/modulos/footer.php"); ?>
         </footer>

@@ -480,6 +480,8 @@
         <div class="container">
       <div class="row" style="background-color: #FAFAFA;">
       
+      <?php   $nombre_tipo_doc="";    $nombre_cliente="";      $ruc_cliente="";?>
+      
       <form id="formularioPrincipal" action="<?php echo $helper->url("Documentos","index"); ?>" method="post" class="form-horizontal">
         
      
@@ -565,17 +567,34 @@
 		   		</td>
 		
 		   		<td>
-		   		<input type="hidden"  id="ruc_cliente_proveedor" name="ruc_cliente_proveedor" value="0">
-                 	  
+		   		 <?php 
+		   		if($resultEdit !="" && !empty($resultCli))
+		   		{
+		   			$id_cliente=$resultEdit[0]->id_cliente_proveedor;
+		   			
+		   			foreach ($resultCli as $resCli)
+		   			{
+		   				if($id_cliente==$resCli->id_cliente_proveedor)
+		   				{
+		   					$nombre_cliente=$resCli->nombre_cliente_proveedor;
+		   					$ruc_cliente = $resCli->ruc_cliente_proveedor;
+		   					break;
+		   				}
+		   			}
+		   			
+		   			
+		   		}
+		   		?>
+		   		
 		   		
 		   		 <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
-					        	<?php foreach($resultCli as $resCli) {?>
-										<input type="text" class="form-control" id="txt_ruc_cliente_proveedor" name="txt_ruc_cliente_proveedor" value="<?php if ($resCli->id_cliente_proveedor == $resEdit->id_cliente_proveedor )  echo  $resCli->ruc_cliente_proveedor; ?>">
-                 			  <?php } ?>
+					        	
+						<input type="text" class="form-control" id="txt_ruc_cliente_proveedor_edit" name="txt_ruc_cliente_proveedor_edit" value="<?php  echo  $ruc_cliente; ?>">
+                 		<input type="hidden"  id="ruc_cliente_proveedor" name="ruc_cliente_proveedor" value="<?php  echo  $resEdit->id_cliente_proveedor; ?>">	
 					     <?php } } else {?>
 					     
 					     <input type="text" class="form-control" id="txt_ruc_cliente_proveedor" name="txt_ruc_cliente_proveedor" value=""  placeholder="Ingrese Ruc Cliente">
-                 		  									
+                 		 <input type="hidden"  id="ruc_cliente_proveedor" name="ruc_cliente_proveedor" value="0">									
 						 <?php } ?>
 						      		
            	 		
@@ -583,33 +602,49 @@
 		
 		   		<td>
 		   		    <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
-					       	<?php foreach($resultCli as $resCli) {?>
-					       	<input type="text" class="form-control" id="txt_nombre_cliente_proveedor" name="txt_nombre_cliente_proveedor" value="<?php if ($resCli->id_cliente_proveedor == $resEdit->id_cliente_proveedor )  echo  $resCli->nombre_cliente_proveedor; ?>">
-                 			
-						   <?php } ?>
+					       
+					       	<input type="text" class="form-control" id="txt_nombre_cliente_proveedor_edit" name="txt_nombre_cliente_proveedor_edit" value="<?php echo  $nombre_cliente; ?>">
+                 			<input type="hidden"  id="nombre_cliente_proveedor" name="nombre_cliente_proveedor" value="<?php  echo  $resEdit->id_cliente_proveedor; ?>">	
+						   
 						  <?php } } else {?>	
 						  					 
 						  <input type="text" class="form-control" id="txt_nombre_cliente_proveedor" name="txt_nombre_cliente_proveedor" value=""  placeholder="Ingrese nombre Cliente">
-                 		  
+                 		  <input type="hidden"  id="nombre_cliente_proveedor" name="nombre_cliente_proveedor" value="0">	
 						 <?php } ?>
-				<input type="hidden"  id="nombre_cliente_proveedor" name="nombre_cliente_proveedor" value="0">		 
+				         	 
 					 
 					<?php unset($resultCli);
 						  unset($resCli);?>
 		   		</td>
 		
 		   		<td>
+		   		<?php 
+		   		if($resultEdit !="" && !empty($resultTip))
+		   		{
+		   			$id_tipo_documentos=$resultEdit[0]->id_tipo_documentos;
+		   			
+		   			foreach ($resultTip as $resTip)
+		   			{
+		   				if($id_tipo_documentos==$resTip->id_tipo_documentos)
+		   				{
+		   					$nombre_tipo_doc=$resTip->nombre_tipo_documentos;
+		   					break;
+		   				}
+		   			}
+		   			
+		   			
+		   		}
+		   		?>
 					 <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
-					       	<?php foreach($resultTip as $resTip) {?>
-					       	<input type="text" class="form-control" id="txt_tipo_documentos" name="txt_tipo_documentos" value="<?php if ($resTip->id_tipo_documentos == $resEdit->id_tipo_documentos )  echo  $resTip->nombre_tipo_documentos; ?>">
-                 			
-						   <?php } ?>
+					       	<input type="text" class="form-control" id="txt_tipo_documentos" name="txt_tipo_documentos_edit" value="<?php   echo  $nombre_tipo_doc ?>">
+                 			<input type="hidden"  id="tipo_documentos" name="tipo_documentos" value="<?php  echo  $resEdit->id_tipo_documentos; ?>">
+						   
 						  <?php } } else {?>	
 						  					 
 						  <input type="text" class="form-control" id="txt_tipo_documentos" name="txt_tipo_documentos" value=""  placeholder="Ingrese Tipo Doc">
-                 		  
+                 		  <input type="hidden"  id="tipo_documentos" name="tipo_documentos" value="0">
 						 <?php } ?>
-					<input type="hidden"  id="tipo_documentos" name="tipo_documentos" value="0">		 
+							 
 				    <?php unset($resultTip);
 						  unset($resTip)
 					?>
