@@ -1,3 +1,4 @@
+
 <?php
 
 $id_documentos_legal = '';
@@ -7,6 +8,7 @@ if (isset ($_GET["id_documentos_legal"]))
 	$id_documentos_legal = $_GET["id_documentos_legal"];
 
 }
+
 
 $image = "";
 //$conn  = pg_connect("user=postgres port=5432 password=.Romina.2012 dbname=coactiva host=192.168.100.3");
@@ -29,8 +31,21 @@ else
 		{
 			$raw = pg_fetch_result($res, $campo );
 			
-			header('Content-type: application/pdf');
+			header('Content-type: application/pdf');				
 			echo pg_unescape_bytea($raw);
+			
+			/*$archivo=$raw;
+			$img_path="/tmp";
+			$file_name=time();
+			$dir="/usr/bin/convert";
+			$comando="$dir {$archivo}[0] $img_path/$file_name.jpg";
+			exec($comando,$out);
+			
+			$image=imagecreatefromjpeg("$img_path/$file_name.jpg");
+			header('Content-Type: image/jpeg');
+			imagejpeg($image);
+			unlink("$img_path/$file_name.jpg");*/
+			
 			
 			
 		}
@@ -40,5 +55,5 @@ else
 }
 
 
-
 ?>
+
