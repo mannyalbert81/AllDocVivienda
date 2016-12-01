@@ -271,7 +271,39 @@
 	}
 	
 	</script>
-       
+    
+     <script>
+	$(document).ready(function(){
+ 	
+	$("#txt_numero_credito").autocomplete({
+		source: "<?php echo $helper->url("DocumentosNumeroCredito","AutocompleteNumeroCredito"); ?>",
+		minLength: 1,
+		select: function( event, data ) 
+			{
+			 var identificador = data.item.id;
+			 var valor = data.item.value;
+			 
+			 $("#txt_numero_credito").val(valor);
+			 $("#numero_credito").val(identificador);
+			 
+			}
+	 });
+		
+	$("#txt_numero_credito").focusout(function(){
+
+		if($("#txt_numero_credito").val()==''||$("#txt_numero_credito").val()==null)
+		{
+			 $("#txt_numero_credito").val('');
+			 $("#numero_credito").val(0);
+			 
+		}
+						
+	});
+						
+	});
+		
+					
+    </script>
        <style>
             input{
                 margin-top:5px;
@@ -400,34 +432,38 @@
 	     			     		</select>
 		   		</td>
 		   		
-		   		<td>	       		
-   		   			<select name="numero_credito" id="numero_credito"  class="form-control">
-				   		 <option value="0"  > --TODOS--</option>
-		   			      <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
-							 <?php foreach($resultPol as $resPol) {?>
-								<option value="<?php echo $resPol->numero_credito_documentos_legal; ?>" <?php if ($resPol->numero_credito_documentos_legal == $resEdit->numero_credito_documentos_legal )  echo  ' selected="selected" '  ;  ?> ><?php echo $resPol->numero_credito_documentos_legal; ?> </option>
-						     <?php } ?>
-			
-				
-					      <?php } } else {?>
-						 
-							<?php foreach($resultPol as $resPol) {?>
-						 		<?php if ($sel_numero_poliza > 0){?>
-						 			<option value="<?php echo $resPol->numero_credito_documentos_legal;?>"  <?php if ($resPol->numero_credito_documentos_legal == $sel_numero_credito) {echo "selected"; }  ?>     > <?php echo $resPol->numero_credito_documentos_legal; ?> </option>
-					 			<?php  } else { ?>
-					 			
-					 				<option value="<?php echo $resPol->numero_credito_documentos_legal;?>" > <?php echo $resPol->numero_credito_documentos_legal; ?> </option>
-					 		
-					 			<?php }  ?>
-	 		
-					 	 	<?php } ?>					        
-						 <?php } ?>
-		
-					</select>
-
-           	 	
-           	 	
-           	 	 		</td>
+		   		<td>
+		   		 <?php 
+		   		 $_numero_credito=0;
+		   		if($resultEdit !="" && !empty($resultPol))
+		   		{
+		   			$numero_credito=$resultEdit[0]->numero_credito_documentos_legal;
+		   			
+		   			foreach ($resultPol as $resPol)
+		   			{
+		   				if($numero_credito==$resPol->numero_credito_documentos_legal)
+		   				{
+		   					$_numero_credito=$resPol->numero_credito_documentos_legal;
+		   					
+		   					break;
+		   				}
+		   			}
+		   			
+		   			
+		   		}
+		   		?>
+		   		 
+		   		   <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
+					        	
+						<input type="text" class="form-control" id="txt_numero_credito_edit" name="txt_numero_credito_edit" value="<?php  echo $_numero_credito; ?>">
+                 		<input type="hidden"  id="numero_credito" name="numero_credito" value="<?php echo  $res->numero_credito_documentos_legal; ?>">	
+					     <?php } } else {?>
+					     
+					     <input type="text" class="form-control" id="txt_numero_credito" name="txt_numero_credito" value=""  placeholder="Ingrese Numero Credito">
+                 		 <input type="hidden"  id="numero_credito" name="numero_credito" value="0">									
+						 <?php } ?>	  
+					
+           	 	</td>
 		
 		   		
 		   	   		

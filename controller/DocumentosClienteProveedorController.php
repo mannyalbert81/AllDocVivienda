@@ -492,7 +492,6 @@ class DocumentosClienteProveedorController extends ControladorBase{
 								}
 								$html.='</div></td>';
 								$html.='<td><div class="right">';
-								$html.='<a href="index.php?controller=Documentos&action=index&id_documentos_legal='.$res->id_documentos_legal.'"class="btn btn-info">Editar</a>';
 								$html.='</div></td>';
 	
 							}
