@@ -53,13 +53,18 @@
 		
  ?>
  
+ <!-- <iframe src="1.pdf#toolbar=0" width="600" height="780" style="border: none;"></iframe> 
+ <embed src="1.pdf#toolbar=0&navpanes=0&scrollbar=0" width="100%" height="425">
+ -->
  
- 
-  <iframe src="DevuelveImagenView.php?id_documentos_legal=<?php echo $id_documentos_legal;?>#toolbar=0" align="middle" noresize frameborder="0" marginwidth="0" marginheight="0">
-  
-  </iframe>
+ <iframe src="1.pdf&embedded=true" style="width:100%; height:100%;" frameborder="0"></iframe>
  
  <?php /*?>
+  <iframe src="1.pdf" align="middle" noresize frameborder="0" marginwidth="0" marginheight="0">
+  
+  </iframe>
+
+<?php /*?>
   <embed src="DevuelveImagenView.php?id_documentos_legal=<?php echo $id_documentos_legal; ?>" toolbar="0" width="100%">
  
   <?php */?>

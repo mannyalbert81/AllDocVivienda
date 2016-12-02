@@ -447,7 +447,7 @@ class DocumentosController extends ControladorBase{
 		$contenido = "";
 		
  		session_start();
-		
+ 		
 		$nombre_controladores = "Documentos";
 		$id_rol= $_SESSION['id_rol'];
 		$resultPer = $documentos_legal->getPermisosVer("  controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
@@ -605,9 +605,13 @@ class DocumentosController extends ControladorBase{
 									$html.='<td><div class="right">';
 						
 									if ($_SESSION["tipo_usuario"]=="usuario_local") {
+										
 										$html.=' <a href="'.IP_EXT . $res->id_documentos_legal.'" class="btn btn-warning" target="blank">Ver</a>';
+										
 									} else {
-										$html.=' <a href="'.IP_EXT . $res->id_documentos_legal.'" class="btn btn-warning" target="blank">Ver</a>';
+										
+											$html.=' <a href="'.IP_EXT . $res->id_documentos_legal.'" class="btn btn-warning" target="blank">Ver</a>';
+								      
 									}
 									$html.='</div></td>';
 									$html.='<td><div class="right">';
