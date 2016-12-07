@@ -15,6 +15,18 @@
                 
             
         </style>
+        
+        <style>
+		@media print
+		{
+		  .no_imprimir{
+		    visibility:hidden;
+		    display:none;
+		  }
+		 }
+		</style>
+        
+        
     </head>
     <body style="background-color: #F6FADE">
     
@@ -26,7 +38,7 @@
       <div class="row" style="background-color: #FAFAFA;">
       
        
-      <form action="<?php echo $helper->url("Usuarios","InsertaUsuarios"); ?>" method="post" class="col-lg-5">
+      <form action="<?php echo $helper->url("Usuarios","InsertaUsuarios"); ?>" method="post" class="col-lg-5 no_imprimir">
             
             
              <h4 style="color:#ec971f;">Insertar Usuarios</h4>
@@ -170,11 +182,11 @@
           </form>
        
        
-        <div class="col-lg-7">
+        <div class="col-lg-7 no_imprimir">
              <h4 style="color:#ec971f;">Lista de  Usuarios</h4>
             	
         </div>
-        <section class="col-lg-7 usuario" style="height:510px;overflow-y:scroll;">
+        <section class="col-lg-7 usuario no_imprimir" style="height:510px;overflow-y:scroll;">
         <table class="table table-hover">
 	         <tr>
 	    		<th>Id</th>

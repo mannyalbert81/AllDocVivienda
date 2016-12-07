@@ -1,4 +1,28 @@
+
+<!DOCTYPE HTML>
+<html lang="es">
+      <head>
+        <meta charset="utf-8"/>
+        <title>Usuarios - aDocument 2015</title>
+
+         <link href="noprint.txt" rel="alternate" media="print">
+
+
+
+<style type="text/css" media="print"><!--
+pdf{ visibility:hidden }
+--></style>
+
+</head>
+
+
+<body>
+
+
 <?php
+
+
+
 
 $id_documentos_legal = '';
 
@@ -42,3 +66,7 @@ else
 
 
 ?>
+
+
+</body>
+ </html>  
