@@ -409,7 +409,7 @@ class DocumentosNumeroCreditoController extends ControladorBase{
 								}
 								$html.='</div></td>';
 								$html.='<td><div class="right">';
-								$html.='<a href="index.php?controller=Documentos&action=index&id_documentos_legal='.$res->id_documentos_legal.'"class="btn btn-info">Editar</a>';
+								//$html.='<a href="index.php?controller=Documentos&action=index&id_documentos_legal='.$res->id_documentos_legal.'"class="btn btn-info">Editar</a>';
 								$html.='</div></td>';
 	
 							}
@@ -511,6 +511,40 @@ class DocumentosNumeroCreditoController extends ControladorBase{
 		return $out;
 	}
 	
+	
+	public function AutocompleteNumeroCredito(){
+	
+		session_start();
+	
+		$numero_credito = strtoupper($_GET['term']);
+		$_numero_credito = array();
+		
+		$documentos_legal = new DocumentosLegalModel();
+	
+	
+		//Tipo de Documento
+		$resultPol = $documentos_legal->getCondiciones("numero_credito_documentos_legal",
+				"documentos_legal", 
+				"numero_credito_documentos_legal LIKE '$numero_credito%' GROUP BY numero_credito_documentos_legal",
+				"numero_credito_documentos_legal");
+		
+	
+		if(!empty($resultPol)){
+	
+			foreach ($resultPol as $res){
+	
+				$_numero_credito[] = array('id' => $res->numero_credito_documentos_legal, 'value' => $res->numero_credito_documentos_legal);
+			}
+			//echo json_encode($_ruc_cliente);
+				
+		}else
+		{
+			//echo json_encode(array(array('id' =>'0,NO DATA', 'value' =>'NO DATA')));
+			$_numero_credito = array(array('id' =>'', 'value' =>'--TODOS--'));
+		}
+	
+		echo  json_encode($_numero_credito);
+	}
 
 		
 	
