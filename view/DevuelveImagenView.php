@@ -1,5 +1,4 @@
-
-
+ 
 <!DOCTYPE HTML>
 <html lang="es">
       <head>
@@ -44,7 +43,9 @@
 
 
 
-<body>
+<body style="background-color: #F6FADE">
+
+
 
 
 <?php
@@ -117,8 +118,9 @@ else
 		}
 		else {
 			pg_close($conn);
-			$publicidad = '<center><img src="" id="imagen" width="700" height="700"></center>';
-		    //echo ;
+			$cabecera = '<CENTER><H1 style="color:#854709;">ERROR ENCONTRADO</H1></CENTER>';
+			$publicidad = '<center><img src="" id="imagen" width="660" height="660"></center>';
+		    echo $cabecera;
 		    die($publicidad);
 			
 			

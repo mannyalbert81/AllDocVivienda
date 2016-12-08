@@ -980,8 +980,14 @@
     <?php */?>
       
        </form>
+       <br>
+       <br>
+       <br>
+      
        </div>
        </div>
+        <br>
+       <br>
         <footer class="col-lg-12">
            <?php include("view/modulos/footer.php"); ?>
         </footer>
