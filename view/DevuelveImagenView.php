@@ -6,24 +6,48 @@
         <meta charset="utf-8"/>
         <title>Usuarios - aDocument 2015</title>
 
-         <link href="noprint.txt" rel="alternate" media="print">
+         
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+          <link rel="stylesheet" href="view/css/bootstrap.css">
+          <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.7.2.custom.css" />
+          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>  
+          <script src="view/js/jquery.js"></script>
+		  
+	      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 
 
-<style type="text/css" media="print"><!--
-pdf{ visibility:hidden }
---></style>
 
+<script>
+    var imagenes=new Array(
+
+        'images/publicidad/1.png',
+        'images/publicidad/2.png',
+        'images/publicidad/3.jpg'
+
+    );
+
+    function rotarImagenes()
+    {
+        var index=Math.floor((Math.random()*imagenes.length));
+        document.getElementById("imagen").src=imagenes[index];
+    }
+
+    onload=function()
+    {
+        rotarImagenes();
+        setInterval(rotarImagenes,3000);
+    }
+    </script>
 </head>
+
 
 
 <body>
 
 
 <?php
-
-
-
 
 
 $id_documentos_legal = '';
@@ -74,7 +98,7 @@ else
 		$id_nombre = 'id_documentos_legal';
 		$id_valor = '75820';
 		
-		if($nombre_rol=='Administrador'||$nombre_rol=='Cliente'||$nombre_rol=='Usuario'||$nombre_rol=='Usuario_Avanzado'||$nombre_rol=='Supervisor')
+		if($nombre_rol=='Administrador')
 		{
 		
 			$res = pg_query($conn, "SELECT archivo_archivos_pdf FROM archivos_pdf WHERE id_documentos_legal = '$id_documentos_legal' ");
@@ -93,7 +117,11 @@ else
 		}
 		else {
 			pg_close($conn);
-			die('Usuario no tiene acceso a Pdf(s)');
+			$publicidad = '<center><img src="" id="imagen" width="700" height="700"></center>';
+		    //echo ;
+		    die($publicidad);
+			
+			
 		}
 		
 	}else {
