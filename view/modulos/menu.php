@@ -48,15 +48,13 @@
 			</li>
 			<li><a href="index.php?controller=ClienteProveedor&action=index">Clientes / Proveedores</a>
 			</li>
-			<li><a href="index.php?controller=Soat&action=index">SOAT</a>
-			</li>
+			
 			<li role="separator" class="divider"></li>
 			<li><a href="index.php?controller=Documentos&action=index">Busqueda de Documentos</a>
 			</li>
 			<li><a href="index.php?controller=DocumentosClienteProveedor&action=index">Busqueda Categorias + Cliente / Proveedor</a>
 			</li>
-			<li><a href="index.php?controller=DocumentosTipoDocumentos&action=index">Busqueda Categorias + Tipo Documentos</a>
-			</li>
+			
 	        <li><a href="index.php?controller=DocumentosCartonDocumentos&action=index">Busqueda Categorias + Carton Documentos</a>
 			</li>
 			<li><a href="index.php?controller=DocumentosNumeroCredito&action=index">Busqueda Categorias + Numero de Credito</a>
@@ -110,11 +108,20 @@
                                  
                                   <select name="criterio_busqueda" id="criterio_busqueda"  class="form-control" >
                                   <option value="0"  > --TODOS--</option>
-									<option value="1"  >Ruc Cliente/Proveedor</option>
+									<option value="1"  >Identificacion Cliente/Proveedor</option>
 									<option value="2"  >Nombre Cliente/Proveedor</option>
 									<option value="3"  >Número Carton</option>
 									<option value="4"  >Número Credito</option>
-									<option value="7"  >Tipo de Documento</option>
+									
+        							
+									<option value="10"  >Referencia</option>
+									<option value="11"  >Tipo Comprobante</option>
+									<option value="12"  >Numero Comprobante</option>
+									<option value="13"  >Detalle Comprobante</option>
+									<option value="14"  >Regionales</option>
+									<option value="15"  >Sucursales</option>
+									<option value="16"  >Agencias</option>
+        							
                                   </select> 
                                   
             </div>
